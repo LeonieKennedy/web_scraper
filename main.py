@@ -15,19 +15,22 @@ with open('sentances.txt') as f:
 previous_sender = "1"
 driver = webdriver.Chrome("chromedriver.exe")
 
-sentence_no = 96
-for i in range(0, 30):
-
-    url = "https://fakedetail.com/fake-android-text-messenger-generator"
+sentence_no = 0
+for i in range(0, 50):
+    print(i)
+    url = "https://fakeinfo.net/fake-telegram-chat-generator"
     driver.get(url)
     driver.implicitly_wait(20)  # seconds
 
     driver.find_element(By.CSS_SELECTOR, "#profile1_name").clear()
-    driver.find_element(By.CSS_SELECTOR, "#profile1_name").send_keys(names[i+23])
+    driver.find_element(By.CSS_SELECTOR, "#profile1_name").send_keys(names[i])
     status = random.choice(["online", "offline"])
-    time = main("00:00:00", "23:59:00")
+
+    driver.find_element(By.CSS_SELECTOR, "#edit-Status").clear()
+    driver.find_element(By.CSS_SELECTOR, "#edit-Status").send_keys(status)
 
     for j in range(0, 4):
+        print(j)
         sender = random.choice(["1", "2"])
 
         button_number = int(sender) + 1
@@ -35,11 +38,12 @@ for i in range(0, 30):
         if previous_sender != sender:
             previous_sender = sender
             print("prev != send")
-            driver.find_element(By.CSS_SELECTOR, "#options > div:nth-child(2) > ul > li:nth-child("+sender+") > a").click()
-
+            driver.find_element(By.CSS_SELECTOR, "#tab-person"+sender+" > div > div:nth-child(4) > button").click()
+        # tab-person1 > div:nth-child(1) > div:nth-child(4) > button:nth-child(1)
         print("profile_message")
         WebDriverWait(driver, 40).until(EC.visibility_of_element_located((By.CSS_SELECTOR, ("#profile"+sender+"_message")))).clear()
         driver.find_element(By.CSS_SELECTOR, ("#profile"+sender+"_message")).send_keys(sentences[sentence_no])
+
 
         driver.find_element(By.CSS_SELECTOR, ("#tab-person"+sender+" > div > div:nth-child(" + str(button_number) + ") > button")).click()
         time.sleep(5)

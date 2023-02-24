@@ -1,6 +1,5 @@
 from datetime import datetime, time, timedelta
 from random import randrange
-f
 
 PROMPT = 'Please enter a {} time in ISO format: '
 
@@ -33,8 +32,11 @@ def rand_time(start: time, end: time) -> time:
 
 def main(in_s, in_e):
     """Runs the script."""
-
+    print("here")
     start = read_time(in_s)
+    print(start)
     end = read_time(in_e)
+    print(end)
     rand = rand_time(start, end)
+    print("end")
     return rand
