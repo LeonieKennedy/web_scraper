@@ -5,7 +5,6 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
-from test import main
 
 with open('names.txt') as f:
     names = [name.rstrip('\n') for name in f]
@@ -24,8 +23,7 @@ for i in range(0, 30):
 
     driver.find_element(By.CSS_SELECTOR, "#profile1_name").clear()
     driver.find_element(By.CSS_SELECTOR, "#profile1_name").send_keys(names[i+23])
-    status = random.choice(["online", "offline"])
-    time = main("00:00:00", "23:59:00")
+
 
     for j in range(0, 4):
         sender = random.choice(["1", "2"])
