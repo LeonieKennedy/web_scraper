@@ -15,21 +15,20 @@ previous_sender = "1"
 driver = webdriver.Chrome("chromedriver.exe")
 
 sentence_no = 96
-for i in range(0, 30):
+for i in range(0, 20):
 
     url = "https://fakedetail.com/fake-android-text-messenger-generator"
     driver.get(url)
     driver.implicitly_wait(20)  # seconds
 
     driver.find_element(By.CSS_SELECTOR, "#profile1_name").clear()
-    driver.find_element(By.CSS_SELECTOR, "#profile1_name").send_keys(names[i+23])
+    driver.find_element(By.CSS_SELECTOR, "#profile1_name").send_keys(names[i])
 
 
-    for j in range(0, 4):
+    for j in range(0, 5):
         sender = random.choice(["1", "2"])
 
         button_number = int(sender) + 1
-
         if previous_sender != sender:
             previous_sender = sender
             print("prev != send")
@@ -45,6 +44,7 @@ for i in range(0, 30):
         sentence_no = sentence_no + 1
 
     time.sleep(15)
+    print(sentence_no)
     WebDriverWait(driver, 40).until(EC.element_to_be_clickable((By.CSS_SELECTOR, "#snapshot"))).click()
     # driver.find_element(By.CSS_SELECTOR, "#snapshot")
 
