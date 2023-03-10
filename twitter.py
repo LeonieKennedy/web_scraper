@@ -10,21 +10,25 @@ with open('names.txt') as f:
 
 with open('sentances.txt') as f:
     sentences = [sentence.rstrip('\n') for sentence in f]
-previous_sender = "1"
-message_no = "2"
+
 driver = webdriver.Chrome("chromedriver.exe")
 
-sentence_no = 700
-for i in range(5, 45):
+for i in range(0, 46):
     print(i)
-    url = "https://fakeinfo.net/fake-whatsapp-chat-generator"
+    previous_sender = "1"
+    message_no = "2"
+    url = "https://fakeinfo.net/fake-twitter-chat-generator"
     driver.get(url)
-    driver.implicitly_wait(20)  # seconds
+    driver.implicitly_wait(10)  # seconds
 
     driver.find_element(By.CSS_SELECTOR, "#profile1_name").clear()
-    driver.find_element(By.CSS_SELECTOR, "#profile1_name").send_keys(names[i])
+    time.sleep(3)
+    driver.find_element(By.CSS_SELECTOR, "#profile1_name").send_keys(names[random.randint(0, 49)])
 
-    for j in range(0, random.randint(1, 5)):
+    driver.find_element(By.CSS_SELECTOR, "#edit-tagname").clear()
+    time.sleep(5)
+    driver.find_element(By.CSS_SELECTOR, "#edit-tagname").send_keys(names[random.randint(0, 49)])
+    for j in range(1, 4):
         print(j)
         sender = random.choice(["1", "2"])
         print(previous_sender, sender)
@@ -34,15 +38,14 @@ for i in range(5, 45):
             print("prev != send")
             driver.find_element(By.CSS_SELECTOR, "#options > div:nth-child(3) > div > div > ul > li:nth-child("+sender+") > a").click()
 
-        time.sleep(5)
+
         WebDriverWait(driver, 40).until(EC.visibility_of_element_located((By.CSS_SELECTOR, ("#profile"+sender+"_message")))).clear()
-        driver.find_element(By.CSS_SELECTOR, ("#profile"+sender+"_message")).send_keys(sentences[sentence_no])
+        driver.find_element(By.CSS_SELECTOR, ("#profile"+sender+"_message")).send_keys(sentences[random.randint(0, 726)])
         driver.find_element(By.CSS_SELECTOR, ("#tab-person"+sender+" > button")).click()
-        time.sleep(5)
-        sentence_no = sentence_no - 1
-    time.sleep(15)
+        time.sleep(3)
+
+    time.sleep(5)
     button = driver.find_element(By.CSS_SELECTOR, "#snapshot")
     driver.execute_script("arguments[0].click();", button)
     # WebDriverWait(driver, 60).until(EC.element_to_be_clickable((By.CSS_SELECTOR, "#snapshot"))).click()
     time.sleep(15)
-#tab-person1 > button
